@@ -18,25 +18,24 @@ class RepertorioController extends ChangeNotifier {
   }
 
   void atualizarMusica(
-      {required String nome,
-      String? novoNome,
+      {required int index,
+      String? nome,
       String? genero,
       String? duracao,
       String? artista,
       String? album}) {
-    int index = list.indexWhere((element) => element.nome == nome);
-    list[index] = list[index].copyWith(
-        nome: novoNome,
-        genero: genero,
-        duracao: duracao,
-        artista: artista,
-        album: album);
-    notifyListeners();
+    if (index != -1) {
+      list[index] = list[index].copyWith(
+          nome: nome,
+          genero: genero,
+          duracao: duracao,
+          artista: artista,
+          album: album);
+      notifyListeners();
+    }
   }
 
-  void removerMusica({required String nome}) {
-    int index = list.indexWhere((element) => element.nome == nome);
-
+  void removerMusica({required int index}) {
     if (index != -1) list.removeAt(index);
     notifyListeners();
   }

@@ -30,6 +30,9 @@ class _AppWidgetState extends State<AppWidget> {
     _albumController = TextEditingController();
   }
 
+  bool isEdit = false;
+  int selectedIndex = -1;
+
   @override
   Widget build(BuildContext context) {
     RepertorioController repertorio = RepertorioController();
@@ -133,7 +136,11 @@ class _AppWidgetState extends State<AppWidget> {
                                                     color:
                                                         ColorsOptions.neutral,
                                                     onPressed: () {
-                                                      print('Deletar');
+                                                      setState(() {
+                                                        selectedIndex = index;
+                                                      });
+                                                      repertorio.removerMusica(
+                                                          index: selectedIndex);
                                                     },
                                                   ),
                                                   IconButton(
@@ -142,7 +149,25 @@ class _AppWidgetState extends State<AppWidget> {
                                                     color:
                                                         ColorsOptions.neutral,
                                                     onPressed: () {
-                                                      print('Editar');
+                                                      setState(() {
+                                                        isEdit = true;
+                                                        selectedIndex = index;
+                                                      });
+                                                      _nameController.text =
+                                                          repertorio
+                                                              .list[index].nome;
+                                                      _genderController.text =
+                                                          repertorio.list[index]
+                                                              .genero;
+                                                      _durationController.text =
+                                                          repertorio.list[index]
+                                                              .duracao;
+                                                      _artistController.text =
+                                                          repertorio.list[index]
+                                                              .artista;
+                                                      _albumController.text =
+                                                          repertorio.list[index]
+                                                              .album;
                                                     },
                                                   ),
                                                 ],
@@ -259,25 +284,36 @@ class _AppWidgetState extends State<AppWidget> {
                                   borderRadius: BorderRadius.circular(6),
                                 )),
                             onPressed: () {
-                              print('Entrou');
                               if (_formKey.currentState!.validate()) {
-                                print('Entrou2');
-                                repertorio.addNovaMusica(Repertorio(
-                                  nome: _nameController.text,
-                                  genero: _genderController.text,
-                                  duracao: _durationController.text,
-                                  artista: _artistController.text,
-                                  album: _albumController.text,
-                                ));
+                                if (isEdit) {
+                                  repertorio.atualizarMusica(
+                                    index: selectedIndex,
+                                    nome: _nameController.text,
+                                    genero: _genderController.text,
+                                    duracao: _durationController.text,
+                                    artista: _artistController.text,
+                                    album: _albumController.text,
+                                  );
+                                } else {
+                                  repertorio.addNovaMusica(Repertorio(
+                                    nome: _nameController.text,
+                                    genero: _genderController.text,
+                                    duracao: _durationController.text,
+                                    artista: _artistController.text,
+                                    album: _albumController.text,
+                                  ));
+                                }
                                 _formKey.currentState?.reset();
                               }
                             },
                             child: Container(
                                 padding:
                                     const EdgeInsets.symmetric(vertical: 15),
-                                child: const Text(
-                                  'Adiconar nova música',
-                                  style: TextStyle(
+                                child: Text(
+                                  isEdit
+                                      ? 'Atualizar música'
+                                      : 'Adiconar nova música',
+                                  style: const TextStyle(
                                     color: ColorsOptions.primary,
                                     fontSize: 15,
                                   ),
