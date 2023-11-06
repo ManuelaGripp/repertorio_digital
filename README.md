@@ -1,4 +1,5 @@
-# repertorio
+[![Flutter](https://github.com/ManuelaGripp/repertorio_digital/actions/workflows/main.yml/badge.svg)](https://github.com/ManuelaGripp/repertorio_digital/actions/workflows/main.yml)
+# Repertorio
 
 A new Flutter project.
 
