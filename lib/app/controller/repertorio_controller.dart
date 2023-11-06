@@ -24,6 +24,7 @@ class RepertorioController extends ChangeNotifier {
       String? duracao,
       String? artista,
       String? album}) {
+    print(index);
     if (index != -1) {
       list[index] = list[index].copyWith(
           nome: nome,

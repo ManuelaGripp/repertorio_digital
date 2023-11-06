@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:repertorio/app/controller/repertorio_controller.dart';
 import 'package:repertorio/app/model/repertorio.dart';
 import 'package:repertorio/app/utils/color.dart';
+import 'package:repertorio/app/view/components/edit_bottom_sheet.dart';
 import 'package:repertorio/app/view/components/text_input.dart';
 
 class AppWidget extends StatefulWidget {
@@ -30,12 +31,11 @@ class _AppWidgetState extends State<AppWidget> {
     _albumController = TextEditingController();
   }
 
-  bool isEdit = false;
   int selectedIndex = -1;
+  RepertorioController repertorio = RepertorioController();
 
   @override
   Widget build(BuildContext context) {
-    RepertorioController repertorio = RepertorioController();
     Size size = MediaQuery.of(context).size;
 
     return Row(
@@ -64,6 +64,7 @@ class _AppWidgetState extends State<AppWidget> {
                               itemCount: repertorio.list.length,
                               itemBuilder: (context, index) {
                                 var musica = repertorio.list[index];
+                                print(repertorio.list.length);
                                 return Column(
                                   children: [
                                     Card(
@@ -148,26 +149,26 @@ class _AppWidgetState extends State<AppWidget> {
                                                         const Icon(Icons.edit),
                                                     color:
                                                         ColorsOptions.neutral,
-                                                    onPressed: () {
+                                                    onPressed: () async {
                                                       setState(() {
-                                                        isEdit = true;
                                                         selectedIndex = index;
                                                       });
-                                                      _nameController.text =
-                                                          repertorio
-                                                              .list[index].nome;
-                                                      _genderController.text =
-                                                          repertorio.list[index]
-                                                              .genero;
-                                                      _durationController.text =
-                                                          repertorio.list[index]
-                                                              .duracao;
-                                                      _artistController.text =
-                                                          repertorio.list[index]
-                                                              .artista;
-                                                      _albumController.text =
-                                                          repertorio.list[index]
-                                                              .album;
+                                                      await showDialog(
+                                                          context: context,
+                                                          builder: (context) =>
+                                                              AlertDialog(
+                                                                backgroundColor:
+                                                                    Colors
+                                                                        .transparent,
+                                                                contentPadding:
+                                                                    const EdgeInsets
+                                                                        .all(0),
+                                                                content: EditForm(
+                                                                    repertorio:
+                                                                        repertorio,
+                                                                    index:
+                                                                        index),
+                                                              ));
                                                     },
                                                   ),
                                                 ],
@@ -285,35 +286,22 @@ class _AppWidgetState extends State<AppWidget> {
                                 )),
                             onPressed: () {
                               if (_formKey.currentState!.validate()) {
-                                if (isEdit) {
-                                  repertorio.atualizarMusica(
-                                    index: selectedIndex,
-                                    nome: _nameController.text,
-                                    genero: _genderController.text,
-                                    duracao: _durationController.text,
-                                    artista: _artistController.text,
-                                    album: _albumController.text,
-                                  );
-                                } else {
-                                  repertorio.addNovaMusica(Repertorio(
-                                    nome: _nameController.text,
-                                    genero: _genderController.text,
-                                    duracao: _durationController.text,
-                                    artista: _artistController.text,
-                                    album: _albumController.text,
-                                  ));
-                                }
-                                _formKey.currentState?.reset();
+                                repertorio.addNovaMusica(Repertorio(
+                                  nome: _nameController.text,
+                                  genero: _genderController.text,
+                                  duracao: _durationController.text,
+                                  artista: _artistController.text,
+                                  album: _albumController.text,
+                                ));
                               }
+                              _formKey.currentState!.reset();
                             },
                             child: Container(
                                 padding:
                                     const EdgeInsets.symmetric(vertical: 15),
-                                child: Text(
-                                  isEdit
-                                      ? 'Atualizar música'
-                                      : 'Adiconar nova música',
-                                  style: const TextStyle(
+                                child: const Text(
+                                  'Adiconar nova música',
+                                  style: TextStyle(
                                     color: ColorsOptions.primary,
                                     fontSize: 15,
                                   ),
