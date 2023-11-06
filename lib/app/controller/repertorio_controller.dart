@@ -2,14 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:repertorio/app/model/repertorio.dart';
 
 class RepertorioController extends ChangeNotifier {
-  List<Repertorio> list = [
-    Repertorio(
-        nome: 'Queria tanto lhe ver',
-        genero: 'Samba',
-        duracao: '1:40',
-        artista: 'Sensação',
-        album: 'Samba é no fundo de quintal')
-  ];
+  List<Repertorio> list = [];
 
   void addNovaMusica(Repertorio novoRepertorio) {
     list.add(novoRepertorio);
