@@ -24,4 +24,22 @@ void main() {
     expect(repertorio.list.first, novaMusica);
   });
 
+  test('should fail to update a song at an invalid index', () {
+    RepertorioController repertorio = RepertorioController();
+    Repertorio initialMusica = Repertorio(
+      nome: 'Meio Termo',
+      genero: 'Sertanejo Universitário',
+      duracao: '2:55',
+      artista: 'Luan Santana <3',
+      album: 'Luan City 2.0',
+    );
+
+    repertorio.addNovaMusica(initialMusica);
+
+    //invalid index
+    repertorio.atualizarMusica(index: 1, nome: 'Ambiente Errado');
+
+    expect(repertorio.list.length, 1);
+    expect(repertorio.list.first, initialMusica);
+  });
 }
