@@ -1,7 +1,7 @@
 [![Flutter](https://github.com/ManuelaGripp/repertorio_digital/actions/workflows/main.yml/badge.svg)](https://github.com/ManuelaGripp/repertorio_digital/actions/workflows/main.yml)
 # Repertorio Digital
 
-##Trabalho feito por:
+## Trabalho feito por:
 - Amanda Silva Guimarães
 - Arthur Ferreira Silva
 - Manuela Gripp Silva
