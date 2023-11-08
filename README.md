@@ -1,17 +1,26 @@
 [![Flutter](https://github.com/ManuelaGripp/repertorio_digital/actions/workflows/main.yml/badge.svg)](https://github.com/ManuelaGripp/repertorio_digital/actions/workflows/main.yml)
-# Repertorio
+# Repertorio Digital
 
-A new Flutter project.
+##Trabalho feito por:
+- Amanda Silva Guimarães
+- Arthur Ferreira Silva
+- Manuela Gripp Silva
+- Maria Luiza Silva Raimundo
 
-## Getting Started
+Esta aplicação foi feita para o Seminário da matéria de Engenharia de Software. A mesma consiste em uma lista de músicas onde se é possível adicionar e excluir músicas e editar suas características (nome, gênero, duração, artista e álbum).
 
-This project is a starting point for a Flutter application.
+## Para instalar as dependências
+```bash
+  flutter pub get
+```
 
-A few resources to get you started if this is your first Flutter project:
+## Para executar o projeto
+```bash
+  flutter run
+```
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## Para executar os testes
+```bash
+  flutter test
+```
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
