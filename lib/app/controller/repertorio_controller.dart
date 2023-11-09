@@ -5,9 +5,13 @@ class RepertorioController extends ChangeNotifier {
   List<Repertorio> list = [];
 
   void addNovaMusica(Repertorio novoRepertorio) {
+  if (!list.contains(novoRepertorio)) {
     list.add(novoRepertorio);
     print(novoRepertorio);
     notifyListeners();
+  } else {
+    print('Música já existe na lista');
+  }
   }
 
   void atualizarMusica(
