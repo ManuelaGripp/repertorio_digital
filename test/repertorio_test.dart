@@ -42,4 +42,34 @@ void main() {
     expect(repertorio.list.length, 1);
     expect(repertorio.list.first, initialMusica);
   });
+
+  test('should remove a song successfully', () {
+    RepertorioController repertorio = RepertorioController();
+    Repertorio musicaExcluida = Repertorio(
+      nome: 'Evidências',
+      genero: 'Sertanejo',
+      duracao: '4:23',
+      artista: 'Chitãozinho & Xororó',
+      album: 'Raízes Sertanejas',
+    );
+
+    repertorio.addNovaMusica(musicaExcluida);
+    repertorio.removerMusica(index:0);
+    expect(repertorio.list.contains(musicaExcluida), isFalse);
+});
+
+test('should not add a song twice', () {
+    RepertorioController repertorio = RepertorioController();
+    Repertorio musicaDuplicada = Repertorio(
+      nome: 'Seu Astral',
+      genero: 'Sertanejo',
+      duracao: '3:15',
+      artista: 'Jorge & Mateus',
+      album: 'Aí Já Era',
+    );
+
+    repertorio.addNovaMusica(musicaDuplicada); 
+    repertorio.addNovaMusica(musicaDuplicada);
+    expect(repertorio.list.length, 1); 
+});
 }
