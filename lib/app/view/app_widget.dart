@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:repertorio/app/controller/repertorio_controller.dart';
 import 'package:repertorio/app/model/song.dart';
-import 'package:repertorio/app/services/vagalume_services.dart';
 import 'package:repertorio/app/utils/color.dart';
 import 'package:repertorio/app/view/components/edit_bottom_sheet.dart';
 import 'package:repertorio/app/view/components/text_input.dart';
@@ -34,9 +33,7 @@ class _AppWidgetState extends State<AppWidget> {
 
   int selectedIndex = -1;
   RepertoireController repertorio = RepertoireController();
-  VagalumeServices service =
-      VagalumeServices(searchParams: 'q=Skank%20Vamos%20Fugir&limit=5');
-
+  
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
