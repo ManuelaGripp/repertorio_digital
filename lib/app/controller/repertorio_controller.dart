@@ -5,12 +5,19 @@ class RepertoireController extends ChangeNotifier {
   List<Song> list = [];
 
   void addNewSong(Song newSong) {
-    if (!list.contains(newSong)) {
-      list.add(newSong);
-      notifyListeners();
-    } else {
-      print('Música já existe na lista');
-    }
+  bool songExists = list.any((song) =>
+      song.name == newSong.name &&
+      song.gender == newSong.gender &&
+      song.duration == newSong.duration &&
+      song.artist == newSong.artist &&
+      song.album == newSong.album);
+
+  if (!songExists) {
+    list.add(newSong);
+    notifyListeners();
+  } else {
+    print('Song exist in the list');
+  }
   }
 
   void updateSong(
