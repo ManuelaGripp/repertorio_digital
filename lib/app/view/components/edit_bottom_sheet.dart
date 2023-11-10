@@ -4,11 +4,11 @@ import 'package:repertorio/app/utils/color.dart';
 import 'package:repertorio/app/view/components/text_input.dart';
 
 class EditForm extends StatefulWidget {
-  const EditForm({super.key, required RepertorioController repertorio, index})
+  const EditForm({super.key, required RepertoireController repertorio, index})
       : _repertorio = repertorio,
         _index = index;
 
-  final RepertorioController _repertorio;
+  final RepertoireController _repertorio;
   final int _index;
 
   @override
@@ -29,13 +29,13 @@ class _EditFormState extends State<EditForm> {
     super.initState();
     _formKey = GlobalKey<FormState>();
     _nameController = TextEditingController(
-        text: widget._repertorio.list[widget._index].nome);
+        text: widget._repertorio.list[widget._index].name);
     _genderController = TextEditingController(
-        text: widget._repertorio.list[widget._index].genero);
+        text: widget._repertorio.list[widget._index].gender);
     _durationController = TextEditingController(
-        text: widget._repertorio.list[widget._index].duracao);
+        text: widget._repertorio.list[widget._index].duration);
     _artistController = TextEditingController(
-        text: widget._repertorio.list[widget._index].artista);
+        text: widget._repertorio.list[widget._index].artist);
     _albumController = TextEditingController(
         text: widget._repertorio.list[widget._index].album);
   }
@@ -51,7 +51,7 @@ class _EditFormState extends State<EditForm> {
             key: _formKey,
             child: SizedBox(
               width: size.width * 0.5,
-              height: size.height * 0.7,
+              height: size.height * 0.8,
               child: Column(
                 children: [
                   TextInput(
@@ -121,18 +121,18 @@ class _EditFormState extends State<EditForm> {
                   ),
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                        primary: ColorsOptions.secondary,
+                        backgroundColor: ColorsOptions.secondary,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(6),
                         )),
                     onPressed: () {
-                      widget._repertorio.atualizarMusica(
+                      widget._repertorio.updateSong(
                         index: widget._index,
                         album: _albumController.text,
-                        artista: _artistController.text,
-                        duracao: _durationController.text,
-                        genero: _genderController.text,
-                        nome: _nameController.text,
+                        artist: _artistController.text,
+                        duration: _durationController.text,
+                        gender: _genderController.text,
+                        name: _nameController.text,
                       );
                       Navigator.pop(context);
                     },

@@ -1,51 +1,49 @@
 import 'package:flutter/material.dart';
-import 'package:repertorio/app/model/repertorio.dart';
+import 'package:repertorio/app/model/song.dart';
 
-class RepertorioController extends ChangeNotifier {
-  List<Repertorio> list = [];
+class RepertoireController extends ChangeNotifier {
+  List<Song> list = [];
 
-  void addNovaMusica(Repertorio novoRepertorio) {
-  if (!list.contains(novoRepertorio)) {
-    list.add(novoRepertorio);
-    print(novoRepertorio);
-    notifyListeners();
-  } else {
-    print('Música já existe na lista');
+  void addNewSong(Song newSong) {
+    if (!list.contains(newSong)) {
+      list.add(newSong);
+      notifyListeners();
+    } else {
+      print('Música já existe na lista');
+    }
   }
-  }
 
-  void atualizarMusica(
+  void updateSong(
       {required int index,
-      String? nome,
-      String? genero,
-      String? duracao,
-      String? artista,
+      String? name,
+      String? gender,
+      String? duration,
+      String? artist,
       String? album}) {
-    print(index);
     if (index != -1) {
       list[index] = list[index].copyWith(
-          nome: nome,
-          genero: genero,
-          duracao: duracao,
-          artista: artista,
+          name: name,
+          gender: gender,
+          duration: duration,
+          artist: artist,
           album: album);
       notifyListeners();
     }
   }
 
-  void removerMusica({required int index}) {
+  void removeSong({required int index}) {
     if (index != -1) list.removeAt(index);
     notifyListeners();
   }
 
-  List<Map<String, dynamic>> getRepertorio() {
-    List<Map<String, dynamic>> repertorioMap = [];
+  List<Map<String, dynamic>> getSong() {
+    List<Map<String, dynamic>> songMap = [];
 
     for (var element in list) {
-      repertorioMap.add(element.toMap());
+      songMap.add(element.toMap());
     }
 
     notifyListeners();
-    return repertorioMap;
+    return songMap;
   }
 }

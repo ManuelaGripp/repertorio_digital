@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:repertorio/app/controller/repertorio_controller.dart';
-import 'package:repertorio/app/model/repertorio.dart';
+import 'package:repertorio/app/model/song.dart';
+import 'package:repertorio/app/services/vagalume_services.dart';
 import 'package:repertorio/app/utils/color.dart';
 import 'package:repertorio/app/view/components/edit_bottom_sheet.dart';
 import 'package:repertorio/app/view/components/text_input.dart';
@@ -32,7 +33,9 @@ class _AppWidgetState extends State<AppWidget> {
   }
 
   int selectedIndex = -1;
-  RepertorioController repertorio = RepertorioController();
+  RepertoireController repertorio = RepertoireController();
+  VagalumeServices service =
+      VagalumeServices(searchParams: 'q=Skank%20Vamos%20Fugir&limit=5');
 
   @override
   Widget build(BuildContext context) {
@@ -44,11 +47,11 @@ class _AppWidgetState extends State<AppWidget> {
           child: Container(
             color: ColorsOptions.primary,
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 70),
+              padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 20),
               child: Column(
                 children: [
                   const Padding(
-                    padding: EdgeInsets.only(bottom: 40),
+                    padding: EdgeInsets.only(bottom: 20),
                     child: Text('Repertório',
                         style: TextStyle(
                           fontSize: 40,
@@ -64,7 +67,6 @@ class _AppWidgetState extends State<AppWidget> {
                               itemCount: repertorio.list.length,
                               itemBuilder: (context, index) {
                                 var musica = repertorio.list[index];
-                                print(repertorio.list.length);
                                 return Column(
                                   children: [
                                     Card(
@@ -88,13 +90,13 @@ class _AppWidgetState extends State<AppWidget> {
                                                     MainAxisAlignment.center,
                                                 children: [
                                                   Text(
-                                                    musica.nome,
+                                                    musica.name,
                                                     style: const TextStyle(
                                                       fontSize: 18,
                                                       color: Colors.black,
                                                     ),
                                                   ),
-                                                  Text(musica.artista,
+                                                  Text(musica.artist,
                                                       style: const TextStyle(
                                                         fontSize: 14,
                                                         color: ColorsOptions
@@ -118,7 +120,7 @@ class _AppWidgetState extends State<AppWidget> {
                                                     ),
                                                   ),
                                                   Text(
-                                                    musica.duracao,
+                                                    musica.duration,
                                                     style: const TextStyle(
                                                       fontSize: 15,
                                                       color:
@@ -140,7 +142,7 @@ class _AppWidgetState extends State<AppWidget> {
                                                       setState(() {
                                                         selectedIndex = index;
                                                       });
-                                                      repertorio.removerMusica(
+                                                      repertorio.removeSong(
                                                           index: selectedIndex);
                                                     },
                                                   ),
@@ -195,11 +197,11 @@ class _AppWidgetState extends State<AppWidget> {
           color: ColorsOptions.primary,
           width: size.width * 0.4,
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 70),
+            padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 20),
             child: Column(
               children: [
                 const Padding(
-                  padding: EdgeInsets.only(bottom: 40),
+                  padding: EdgeInsets.only(bottom: 20),
                   child: Text('Nova música',
                       style: TextStyle(
                         color: ColorsOptions.secondary,
@@ -224,7 +226,7 @@ class _AppWidgetState extends State<AppWidget> {
                             },
                           ),
                           const SizedBox(
-                            height: 10,
+                            height: 5,
                           ),
                           TextInput(
                             label: 'Gênero da música',
@@ -237,7 +239,7 @@ class _AppWidgetState extends State<AppWidget> {
                             },
                           ),
                           const SizedBox(
-                            height: 10,
+                            height: 5,
                           ),
                           TextInput(
                             label: 'Duração da música',
@@ -250,7 +252,7 @@ class _AppWidgetState extends State<AppWidget> {
                             },
                           ),
                           const SizedBox(
-                            height: 10,
+                            height: 5,
                           ),
                           TextInput(
                             label: 'Artista da música',
@@ -263,7 +265,7 @@ class _AppWidgetState extends State<AppWidget> {
                             },
                           ),
                           const SizedBox(
-                            height: 10,
+                            height: 5,
                           ),
                           TextInput(
                             label: 'Álbum da música',
@@ -280,17 +282,17 @@ class _AppWidgetState extends State<AppWidget> {
                           ),
                           ElevatedButton(
                             style: ElevatedButton.styleFrom(
-                                primary: ColorsOptions.secondary,
+                                backgroundColor: ColorsOptions.secondary,
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(6),
                                 )),
                             onPressed: () {
                               if (_formKey.currentState!.validate()) {
-                                repertorio.addNovaMusica(Repertorio(
-                                  nome: _nameController.text,
-                                  genero: _genderController.text,
-                                  duracao: _durationController.text,
-                                  artista: _artistController.text,
+                                repertorio.addNewSong(Song(
+                                  name: _nameController.text,
+                                  gender: _genderController.text,
+                                  duration: _durationController.text,
+                                  artist: _artistController.text,
                                   album: _albumController.text,
                                 ));
                               }
