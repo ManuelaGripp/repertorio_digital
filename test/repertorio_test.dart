@@ -59,17 +59,27 @@ void main() {
   });
 
   test('should not add a song twice', () {
-    RepertoireController repertorio = RepertoireController();
-    Song musicaDuplicada = Song(
-      name: 'Seu Astral',
-      gender: 'Sertanejo',
-      duration: '3:15',
-      artist: 'Jorge & Mateus',
-      album: 'Aí Já Era',
-    );
+  RepertoireController repertorio = RepertoireController();
+  
+  Song music1 = Song(
+    name: 'Seu Astral',
+    gender: 'Sertanejo',
+    duration: '3:15',
+    artist: 'Jorge & Mateus',
+    album: 'Aí Já Era',
+  );
 
-    repertorio.addNewSong(musicaDuplicada);
-    repertorio.addNewSong(musicaDuplicada);
-    expect(repertorio.list.length, 1);
-  });
+  Song music2 = Song(
+    name: 'Seu Astral',
+    gender: 'Sertanejo',
+    duration: '3:15',
+    artist: 'Jorge & Mateus',
+    album: 'Aí Já Era',
+  );
+
+  repertorio.addNewSong(music1);
+  repertorio.addNewSong(music2);
+  expect(repertorio.list.length, 1);
+});
+
 }
