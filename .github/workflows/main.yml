@@ -13,8 +13,8 @@ jobs:
     - uses: subosito/flutter-action@v2
       with:
         channel: 'stable'
-    - run: apt-get -y install lcov
     - run: flutter pub get
+    - run: apt-get -y install lcov
     - run: flutter test --coverage
     - run: genhtml coverage/lcov.info -o coverage/html
     - uses: actions/upload-artifact@v3
@@ -36,4 +36,4 @@ jobs:
     - uses: actions/upload-artifact@v3
       with:
         name: Build
-        path: ./build/*
+        path: ./build/web/*
