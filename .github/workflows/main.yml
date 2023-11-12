@@ -26,7 +26,8 @@ jobs:
         channel: 'stable' 
     - run: flutter pub get
     - run: flutter build web
+    - run: ls
     - uses: actions/upload-artifact@v3
       with:
         name: Build
-        path: build/*
+        path: ./build/*
