@@ -20,7 +20,7 @@ jobs:
     - uses: actions/upload-artifact@v3
       with:
         name: Coverage
-        path: ./coverage/html/index.html
+        path: ./coverage/html/*
 
   build:
     needs: test
