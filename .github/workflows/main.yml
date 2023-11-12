@@ -1,12 +1,12 @@
 name: Flutter
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "test-report" ]
   pull_request:
-    branches: [ "main" ]
+    branches: [ "test-report" ]
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
@@ -15,4 +15,19 @@ jobs:
         channel: 'stable'
     - run: flutter pub get
     - run: flutter test
+
+jobs:
+  build:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - uses: subosito/flutter-action@v2
+      with:
+        channel: 'stable' 
+    - run: flutter pub get
     - run: flutter build web
+    - uses: actions/upload-artifact@v3
+      with:
+        name: Build
+        path: build/
