@@ -15,8 +15,7 @@ jobs:
         channel: 'stable'
     - run: flutter pub get
     - run: flutter test
-
-jobs:
+    
   build:
     needs: test
     runs-on: ubuntu-latest
