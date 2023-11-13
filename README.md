@@ -10,7 +10,7 @@ A ferramenta escolhida pelo grupo foi Flutter, que é um framework de código ab
 - extraia os arquivos do .zip para um local de sua preferência
 - copie o caminho da pasta /bin e cole no path das suas variáveis de ambiente
 
-## Como vazer a integração do Flutter com o VS Code
+## Como fazer a integração do Flutter com o VS Code
 Para esta aplicação, programamos o software pelo editor de texto Visual Studio Code. Você pode instalar o mesmo por este link <a href='https://code.visualstudio.com/download'>https://code.visualstudio.com/download</a>
 
 Após a instalação, certifique-se de instalar as dependências "Flutter" e "Dart".
@@ -27,8 +27,8 @@ Abra o terminal e digite:
 
 ## Como gerenciar as dependências do projeto
 O arquivo onde ficam as dependencias é o pubspec.yaml logo após dependencies e dev_dependencies.
-Há duas maneiras de instalar uma nova dependência
-- Rodando o comando:
+Há duas maneiras de instalar uma nova dependência, são elas:
+- Rodando o comando
 ```bash
   flutter pub add nome-do-pacote
 ```
@@ -41,12 +41,12 @@ Para instalar os packages basta rodar:
 
 Para remover utilize:
 ```bash
-  lutter pub remove package
+  flutter pub remove package
 ```
 
 Para atualizar:
 ```bash
-  lutter pub upgrade package
+  flutter pub upgrade package
 ```
 
 ## Para executar o projeto
