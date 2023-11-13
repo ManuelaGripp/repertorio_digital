@@ -5,19 +5,19 @@ class RepertoireController extends ChangeNotifier {
   List<Song> list = [];
 
   void addNewSong(Song newSong) {
-  bool songExists = list.any((song) =>
-      song.name == newSong.name &&
-      song.gender == newSong.gender &&
-      song.duration == newSong.duration &&
-      song.artist == newSong.artist &&
-      song.album == newSong.album);
+    bool songExists = list.any((song) =>
+        song.name == newSong.name &&
+        song.gender == newSong.gender &&
+        song.duration == newSong.duration &&
+        song.artist == newSong.artist &&
+        song.album == newSong.album);
 
-  if (!songExists) {
-    list.add(newSong);
-    notifyListeners();
-  } else {
-    print('Song exist in the list');
-  }
+    if (!songExists) {
+      list.add(newSong);
+      notifyListeners();
+    } else {
+      print('Song exist in the list');
+    }
   }
 
   void updateSong(
@@ -41,16 +41,5 @@ class RepertoireController extends ChangeNotifier {
   void removeSong({required int index}) {
     if (index != -1) list.removeAt(index);
     notifyListeners();
-  }
-
-  List<Map<String, dynamic>> getSong() {
-    List<Map<String, dynamic>> songMap = [];
-
-    for (var element in list) {
-      songMap.add(element.toMap());
-    }
-
-    notifyListeners();
-    return songMap;
   }
 }

@@ -8,6 +8,20 @@ void main() {
     expect(repertorio.list.length, 0);
   });
 
+  test('should update only the copyWith params', () {
+    Song song = Song(
+        name: 'Descobir que te amo demais',
+        album: 'Deixa Clarear',
+        artist: 'Zeca ',
+        duration: '1:20',
+        gender: 'Samba');
+
+    song = song.copyWith(name: 'Verdade', artist: 'Zeca Pagodinho');
+    expect(song.name, 'Verdade');
+    expect(song.artist, 'Zeca Pagodinho');
+    expect(song.album, 'Deixa Clarear');
+  });
+
   test('should add a new song successfully', () {
     RepertoireController repertorio = RepertoireController();
     Song newSong = Song(

@@ -27,14 +27,4 @@ class Song {
       album: album ?? this.album,
     );
   }
-
-  Map<String, dynamic> toMap() {
-    return <String, dynamic>{
-      'name': name,
-      'gender': gender,
-      'duration': duration,
-      'artist': artist,
-      'lancamento': album,
-    };
-  }
 }
