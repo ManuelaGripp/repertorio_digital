@@ -10,7 +10,7 @@ void main() {
 
   test('should add a new song successfully', () {
     RepertoireController repertorio = RepertoireController();
-    Song novaMusica = Song(
+    Song newSong = Song(
       name: 'Morena',
       gender: 'Sertanejo Universitário',
       duration: '3:13',
@@ -18,15 +18,15 @@ void main() {
       album: 'Luan City',
     );
 
-    repertorio.addNewSong(novaMusica);
+    repertorio.addNewSong(newSong);
 
     expect(repertorio.list.length, 1);
-    expect(repertorio.list.first, novaMusica);
+    expect(repertorio.list.first, newSong);
   });
 
-  test('should fail to update a song at an invalid index', () {
+  test('should update song details at a valid index in the repertoire', () {
     RepertoireController repertorio = RepertoireController();
-    Song initialMusica = Song(
+    Song newSong = Song(
       name: 'Meio Termo',
       gender: 'Sertanejo Universitário',
       duration: '2:55',
@@ -34,13 +34,17 @@ void main() {
       album: 'Luan City 2.0',
     );
 
-    repertorio.addNewSong(initialMusica);
+    repertorio.addNewSong(newSong);
 
-    //invalid index
-    //repertorio.atualizarMusica(index: 1, name: 'Ambiente Errado');
+    repertorio.updateSong(index: 0, name: 'Ambiente Errado');
 
     expect(repertorio.list.length, 1);
-    expect(repertorio.list.first, initialMusica);
+
+    expect(repertorio.list.first.name, 'Ambiente Errado');
+    expect(repertorio.list.first.gender, 'Sertanejo Universitário');
+    expect(repertorio.list.first.duration, '2:55');
+    expect(repertorio.list.first.artist, 'Luan Santana <3');
+    expect(repertorio.list.first.album, 'Luan City 2.0');
   });
 
   test('should remove a song successfully', () {
@@ -59,27 +63,26 @@ void main() {
   });
 
   test('should not add a song twice', () {
-  RepertoireController repertorio = RepertoireController();
-  
-  Song music1 = Song(
-    name: 'Seu Astral',
-    gender: 'Sertanejo',
-    duration: '3:15',
-    artist: 'Jorge & Mateus',
-    album: 'Aí Já Era',
-  );
+    RepertoireController repertorio = RepertoireController();
 
-  Song music2 = Song(
-    name: 'Seu Astral',
-    gender: 'Sertanejo',
-    duration: '3:15',
-    artist: 'Jorge & Mateus',
-    album: 'Aí Já Era',
-  );
+    Song music1 = Song(
+      name: 'Seu Astral',
+      gender: 'Sertanejo',
+      duration: '3:15',
+      artist: 'Jorge & Mateus',
+      album: 'Aí Já Era',
+    );
 
-  repertorio.addNewSong(music1);
-  repertorio.addNewSong(music2);
-  expect(repertorio.list.length, 1);
-});
+    Song music2 = Song(
+      name: 'Seu Astral',
+      gender: 'Sertanejo',
+      duration: '3:15',
+      artist: 'Jorge & Mateus',
+      album: 'Aí Já Era',
+    );
 
+    repertorio.addNewSong(music1);
+    repertorio.addNewSong(music2);
+    expect(repertorio.list.length, 1);
+  });
 }
