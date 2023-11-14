@@ -56,7 +56,7 @@ Para atualizar:
 
 ## Para executar os testes
 ```bash
-  flutter test
+  flutter test --coverage
 ```
 
 ## Membros da equipe:
