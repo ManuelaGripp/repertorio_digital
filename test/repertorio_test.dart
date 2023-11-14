@@ -1,6 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:repertorio/app/controller/repertorio_controller.dart';
 import 'package:repertorio/app/model/song.dart';
+import 'package:repertorio/invalidIndexException.dart';
 
 void main() {
   test('should have lenght equal to 0', () {
@@ -110,8 +111,10 @@ void main() {
       album: 'The Dark Side of the moon',
     );
 
+
     repertorio.addNewSong(musicaExcluida);
-    repertorio.removeSong(index: 0);
-    expect(repertorio.list.contains(musicaExcluida), isTrue);
+    expect(() => repertorio.removeSong(index: -1), throwsA(InvalidIndexException));
   });
+
+
 }

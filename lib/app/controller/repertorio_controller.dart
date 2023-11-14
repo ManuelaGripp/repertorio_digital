@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:repertorio/app/model/song.dart';
-
+import 'package:repertorio/invalidIndexException.dart';
 class RepertoireController extends ChangeNotifier {
   List<Song> list = [];
 
@@ -39,7 +39,10 @@ class RepertoireController extends ChangeNotifier {
   }
 
   void removeSong({required int index}) {
-    if (index != -1) list.removeAt(index);
-    notifyListeners();
+    if (index >= 0){
+      list.removeAt(index);
+      notifyListeners();
+    } else throw InvalidIndexException;
+    
   }
 }
