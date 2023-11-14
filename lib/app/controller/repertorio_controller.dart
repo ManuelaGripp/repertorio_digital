@@ -27,7 +27,7 @@ class RepertoireController extends ChangeNotifier {
       String? duration,
       String? artist,
       String? album}) {
-    if (index != -1) {
+    if (index >= 0) {
       list[index] = list[index].copyWith(
           name: name,
           gender: gender,
@@ -35,7 +35,7 @@ class RepertoireController extends ChangeNotifier {
           artist: artist,
           album: album);
       notifyListeners();
-    }
+    } else throw InvalidIndexException;
   }
 
   void removeSong({required int index}) {

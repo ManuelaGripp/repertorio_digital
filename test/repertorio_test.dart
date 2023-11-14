@@ -101,6 +101,20 @@ void main() {
     expect(repertorio.list.length, 1);
   });
 
+  test('should throw an Exception when a index less equal than zero is passed as a param', () {
+    RepertoireController repertorio = RepertoireController();
+    Song song = Song(
+        name: 'Dosed',
+        album: 'By the Way',
+        artist: 'Red Hot Chili Peppers',
+        duration: '4:29',
+        gender: 'Rock');
+
+    repertorio.addNewSong(song);
+    expect(() => repertorio.updateSong(index: -1, name: 'Cant Stop'), throwsA(InvalidIndexException));
+  });
+
+
   test('A song was not removed', () {
     RepertoireController repertorio = RepertoireController();
     Song musicaExcluida = Song(
