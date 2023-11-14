@@ -99,4 +99,19 @@ void main() {
     repertorio.addNewSong(music2);
     expect(repertorio.list.length, 1);
   });
+
+  test('A song was not removed', () {
+    RepertoireController repertorio = RepertoireController();
+    Song musicaExcluida = Song(
+      name: 'Brain damage',
+      gender: 'Rock Progressivo',
+      duration: '3:47',
+      artist: 'Pink Floyd',
+      album: 'The Dark Side of the moon',
+    );
+
+    repertorio.addNewSong(musicaExcluida);
+    repertorio.removeSong(index: 0);
+    expect(repertorio.list.contains(musicaExcluida), isTrue);
+  });
 }
