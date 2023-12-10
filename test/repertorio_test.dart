@@ -101,7 +101,9 @@ void main() {
     expect(repertorio.list.length, 1);
   });
 
-  test('should throw an Exception when a index less equal than zero is passed as a param', () {
+  test(
+      'should throw an Exception when a index less equal than zero is passed as a param',
+      () {
     RepertoireController repertorio = RepertoireController();
     Song song = Song(
         name: 'Dosed',
@@ -111,9 +113,9 @@ void main() {
         gender: 'Rock');
 
     repertorio.addNewSong(song);
-    expect(() => repertorio.updateSong(index: -1, name: 'Cant Stop'), throwsA(InvalidIndexException));
+    expect(() => repertorio.updateSong(index: -1, name: 'Cant Stop'),
+        throwsA(InvalidIndexException));
   });
-
 
   test('A song was not removed', () {
     RepertoireController repertorio = RepertoireController();
@@ -125,10 +127,8 @@ void main() {
       album: 'The Dark Side of the moon',
     );
 
-
     repertorio.addNewSong(musicaExcluida);
-    expect(() => repertorio.removeSong(index: -1), throwsA(InvalidIndexException));
+    expect(
+        () => repertorio.removeSong(index: -1), throwsA(InvalidIndexException));
   });
-
-
 }

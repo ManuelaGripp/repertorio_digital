@@ -1,7 +1,9 @@
 [![Flutter](https://github.com/ManuelaGripp/repertorio_digital/actions/workflows/main.yml/badge.svg)](https://github.com/ManuelaGripp/repertorio_digital/actions/workflows/main.yml)
 # Repertorio Digital
 
-Esta aplicação foi feita para o Seminário da matéria de Engenharia de Software. A mesma consiste em uma lista de músicas onde se é possível adicionar e excluir músicas e, também, editar suas características (nome, gênero, duração, artista e álbum).
+Esta aplicação foi feita para o Seminário da matéria de Engenharia de Software e depois atualizada para o Trabalho Final do Laboratório desta mesma disciplina. A mesma consiste em uma lista de músicas onde se é possível adicionar e excluir músicas e, também, editar suas características (nome, gênero, duração, artista e álbum).
+
+Com a atualização, possui um mecanismo de busca, utilizando da API aberta do site de músicas Vagalume.
 
 A ferramenta escolhida pelo grupo foi Flutter, que é um framework de código aberto desenvolvido pelo Google, que utiliza a linguagem de programação Dart, também desenvolvida pelo Google, que é orientada a objetos e oferece recursos de tipagem estática.
 
@@ -63,5 +65,5 @@ Para atualizar:
 - Amanda Silva Guimarães
 - Arthur Ferreira Silva
 - Manuela Gripp Silva
-- Maria Luiza Silva Raimund
+- Maria Luiza Silva Raimundo
 
