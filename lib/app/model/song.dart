@@ -1,15 +1,15 @@
 class Song {
   String name;
-  String gender;
-  String duration;
+  String? gender;
+  String? duration;
   String artist;
-  String album;
+  String? album;
   Song({
     required this.name,
-    required this.gender,
-    required this.duration,
+    this.gender,
+    this.duration,
     required this.artist,
-    required this.album,
+    this.album,
   });
 
   Song copyWith({

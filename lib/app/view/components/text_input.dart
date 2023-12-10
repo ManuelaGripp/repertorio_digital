@@ -43,6 +43,10 @@ class _TextInputState extends State<TextInput> {
               controller: widget._controller,
               validator: widget._validators,
               decoration: const InputDecoration(
+                  contentPadding: EdgeInsets.only(
+                    left: 15,
+                    top: 20,
+                  ),
                   focusedErrorBorder: OutlineInputBorder(
                     borderSide: BorderSide.none,
                   ),

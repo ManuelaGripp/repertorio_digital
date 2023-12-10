@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:repertorio/app/model/song.dart';
+import 'package:repertorio/app/service/search_service.dart';
 import 'package:repertorio/invalidIndexException.dart';
+
+import '../model/song_response.dart';
+
 class RepertoireController extends ChangeNotifier {
   List<Song> list = [];
 
@@ -15,8 +19,6 @@ class RepertoireController extends ChangeNotifier {
     if (!songExists) {
       list.add(newSong);
       notifyListeners();
-    } else {
-      print('Song exist in the list');
     }
   }
 
@@ -35,14 +37,19 @@ class RepertoireController extends ChangeNotifier {
           artist: artist,
           album: album);
       notifyListeners();
-    } else throw InvalidIndexException;
+    } else
+      throw InvalidIndexException;
   }
 
   void removeSong({required int index}) {
-    if (index >= 0){
+    if (index >= 0) {
       list.removeAt(index);
       notifyListeners();
-    } else throw InvalidIndexException;
-    
+    } else
+      throw InvalidIndexException;
+  }
+
+  Future<SongResponseEntity> getSongs(SearchService service) async {
+    return await service.fetchProducts(songName: 'Vamos fugir');
   }
 }
