@@ -3,14 +3,10 @@ import 'package:repertorio/app/interfaces/fetchSonginterface.dart';
 import 'package:repertorio/app/model/song.dart';
 import 'package:repertorio/app/service/search_service.dart';
 import 'package:repertorio/invalidIndexException.dart';
-
-import '../../../test/repertorio_test.dart';
 import '../model/song_response.dart';
 
 class RepertoireController extends ChangeNotifier{
   List<Song> list = [];
-
-  RepertoireController(MockSearchService mockSearchService);
 
   void addNewSong(Song newSong) {
     bool songExists = list.any((song) =>
@@ -53,13 +49,8 @@ class RepertoireController extends ChangeNotifier{
       throw InvalidIndexException;
   }
 
-  Future<void> getSongs(SearchService service, String songName, RepertoireController repertoire) async {
+  Future<SongResponseEntity> getSongs(SearchService service, String songName, RepertoireController repertoire) async {
     SongResponseEntity  newSong =  await service.fetchSong(songName: songName);
-    repertoire.addNewSong(
-                                  Song(
-                                      name: newSong.docs[0].title ?? '',
-                                      artist: newSong.docs[0].band),
-                                );
+    return newSong;
   }
-
 }

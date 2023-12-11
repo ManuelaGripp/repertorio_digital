@@ -137,22 +137,51 @@ void main() {
         () => repertorio.removeSong(index: -1), throwsA(InvalidIndexException));
   });
 
-  test('Adding a song using a Search API', () async {
-    RepertoireController repertorio = RepertoireController();
-    final MockSearchService repertoireMock = MockSearchService();
+  // test('Adding a song using a Search API', () async {
+  //   RepertoireController repertorio = RepertoireController();
+  //   final MockSearchService repertoireMock = MockSearchService();
 
-    final SongResponseEntity songResponse = SongResponseEntity(docs: [
-      SongResponseDataEntity(
-        title: 'Verdade', 
-        band: 'Zeca Pagodinho', 
-        id: '1')
-    ]);
+  //   final SongResponseEntity songResponse = SongResponseEntity(docs: [
+  //     SongResponseDataEntity(
+  //       title: 'Verdade', 
+  //       band: 'Zeca Pagodinho', 
+  //       id: '1')
+  //   ]);
 
-    when(repertoireMock.fetchSong(songName: 'Verdade')).thenAnswer((_) async => songResponse);
-    SongResponseEntity response = await repertoireMock.fetchSong(songName: 'Verdade');
-    expect(repertorio.list.length, 1);
-    expect(response, 'Verdade');
-    expect(response, 'Zeca Pagodinho');
-  });
+  //   when(repertoireMock.fetchSong(songName: 'Verdade')).thenAnswer((_) async => songResponse);
+  //   SongResponseEntity response = await repertoireMock.fetchSong(songName: 'Verdade');
+  //   expect(repertorio.list.length, 1);
+  //   expect(response, 'Verdade');
+  //   expect(response, 'Zeca Pagodinho');
+  // });
+
+  test('should mock the getSongs function', () async {
+      // Configurar o mock do SearchService
+      final MockSearchService mockSearchService = MockSearchService();
+      final repertorio = RepertoireController();
+
+      // Configurar o comportamento do mock quando fetchSong é chamado
+      when(mockSearchService.fetchSong(songName: 'Verdade'))
+          .thenAnswer((_) async => SongResponseEntity(docs: [
+                SongResponseDataEntity(
+                  title: 'Verdade',
+                  band: 'Zeca Pagodinho',
+                  id: '1',
+                ),
+              ]));
+
+      // Chamar o método que você deseja testar (getSongs)
+      final SongResponseEntity result = await repertorio.getSongs(mockSearchService as SearchService, 'Verdade', repertorio);
+
+      // Verificar se a função getSongs foi chamada corretamente
+      verify(repertorio.getSongs(mockSearchService as SearchService, 'Verdade', repertorio)).called(1);
+
+      // Verificar se o resultado é o esperado (pode variar dependendo da lógica específica da sua aplicação)
+      expect(result, isA<SongResponseEntity>());
+      expect(result.docs.length, 1);
+      expect(result.docs[0].title, 'Verdade');
+      expect(result.docs[0].band, 'Zeca Pagodinho');
+      expect(result.docs[0].id, '1');
+    });
   
 }
