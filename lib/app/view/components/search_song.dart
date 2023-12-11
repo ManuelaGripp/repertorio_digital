@@ -72,13 +72,7 @@ class _SearchSongState extends State<SearchSong> {
                                 )),
                             onPressed: () async {
                               if (_formKey.currentState!.validate()) {
-                                SongResponseEntity song =
-                                    await widget.repertorio.getSongs(service);
-                                widget.repertorio.addNewSong(
-                                  Song(
-                                      name: song.docs[0].title ?? '',
-                                      artist: song.docs[0].band),
-                                );
+                                    await widget.repertorio.getSongs(service, _nameController.text,widget.repertorio);
                               }
                               Navigator.pop(context);
                               _formKey.currentState!.reset();

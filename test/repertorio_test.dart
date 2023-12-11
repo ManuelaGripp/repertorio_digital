@@ -1,8 +1,13 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mockito/mockito.dart';
 import 'package:repertorio/app/controller/repertorio_controller.dart';
+import 'package:repertorio/app/interfaces/fetchSonginterface.dart';
 import 'package:repertorio/app/model/song.dart';
+import 'package:repertorio/app/model/song_response.dart';
+import 'package:repertorio/app/service/search_service.dart';
 import 'package:repertorio/invalidIndexException.dart';
 
+class MockSearchService extends Mock implements FetchSongInterface {}
 void main() {
   test('should have lenght equal to 0', () {
     RepertoireController repertorio = RepertoireController();
@@ -131,4 +136,23 @@ void main() {
     expect(
         () => repertorio.removeSong(index: -1), throwsA(InvalidIndexException));
   });
+
+  test('Adding a song using a Search API', () async {
+    RepertoireController repertorio = RepertoireController();
+    final MockSearchService repertoireMock = MockSearchService();
+
+    final SongResponseEntity songResponse = SongResponseEntity(docs: [
+      SongResponseDataEntity(
+        title: 'Verdade', 
+        band: 'Zeca Pagodinho', 
+        id: '1')
+    ]);
+
+    when(repertoireMock.fetchSong(songName: 'Verdade')).thenAnswer((_) async => songResponse);
+    SongResponseEntity response = await repertoireMock.fetchSong(songName: 'Verdade');
+    expect(repertorio.list.length, 1);
+    expect(response, 'Verdade');
+    expect(response, 'Zeca Pagodinho');
+  });
+  
 }

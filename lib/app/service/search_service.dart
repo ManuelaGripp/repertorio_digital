@@ -1,10 +1,12 @@
 import 'package:http/http.dart' as http;
+import 'package:repertorio/app/interfaces/fetchSonginterface.dart';
 import 'dart:convert';
 
 import '../model/song_response.dart';
 
-class SearchService {
-  Future<SongResponseEntity> fetchProducts({required String songName}) async {
+class SearchService implements FetchSongInterface{
+  @override
+  Future<SongResponseEntity> fetchSong({required String songName}) async {
     var url = 'https://api.vagalume.com.br/search.artmus?q=$songName';
 
     final response = await http.get(Uri.parse(url));
