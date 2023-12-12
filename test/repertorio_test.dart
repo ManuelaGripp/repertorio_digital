@@ -1,4 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:repertorio/app/controller/repertorio_controller.dart';
 import 'package:repertorio/app/interfaces/fetchSonginterface.dart';
@@ -7,7 +8,9 @@ import 'package:repertorio/app/model/song_response.dart';
 import 'package:repertorio/app/service/search_service.dart';
 import 'package:repertorio/invalidIndexException.dart';
 
-class MockSearchService extends Mock implements FetchSongInterface {}
+@GenerateNiceMocks([MockSpec<SearchService>()])
+import 'repertorio_test.mocks.dart';
+
 void main() {
   test('should have lenght equal to 0', () {
     RepertoireController repertorio = RepertoireController();
@@ -159,7 +162,6 @@ void main() {
       // Configurar o mock do SearchService
       final MockSearchService mockSearchService = MockSearchService();
       final repertorio = RepertoireController();
-
       // Configurar o comportamento do mock quando fetchSong é chamado
       when(mockSearchService.fetchSong(songName: 'Verdade'))
           .thenAnswer((_) async => SongResponseEntity(docs: [
@@ -171,10 +173,10 @@ void main() {
               ]));
 
       // Chamar o método que você deseja testar (getSongs)
-      final SongResponseEntity result = await repertorio.getSongs(mockSearchService as SearchService, 'Verdade', repertorio);
+      final SongResponseEntity result = await repertorio.getSongs(mockSearchService, 'Verdade', repertorio);
 
       // Verificar se a função getSongs foi chamada corretamente
-      verify(repertorio.getSongs(mockSearchService as SearchService, 'Verdade', repertorio)).called(1);
+      verify(repertorio.getSongs(mockSearchService, 'Verdade', repertorio)).called(1);
 
       // Verificar se o resultado é o esperado (pode variar dependendo da lógica específica da sua aplicação)
       expect(result, isA<SongResponseEntity>());
